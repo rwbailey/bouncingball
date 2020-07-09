@@ -12,7 +12,7 @@ const (
 
 func main() {
 	board := newBoard(30, 80)
-	buffer := make([]rune, 0, board.x*board.y)
+	buffer := make([]rune, 0, board.x*(board.y+1)) // +1 to account for newline
 	for {
 		Clear()
 		MoveTopLeft()
