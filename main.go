@@ -7,13 +7,14 @@ import (
 
 func main() {
 	board := newBoard(30, 80)
-
+	buffer := make([]rune, 0, board.x*board.y)
 	for {
 		Clear()
 		MoveTopLeft()
 		board.cells = newCells(board.x, board.y)
 		board.updateBallOnBoard()
-		buffer := board.loadBuffer()
+		buffer = buffer[:0]
+		buffer := board.loadBuffer(buffer)
 		fmt.Println(string(buffer))
 		board.nextBallPos()
 		time.Sleep(time.Second / 6)
@@ -32,8 +33,7 @@ type board struct {
 	ball  *ball
 }
 
-func (b *board) loadBuffer() []rune {
-	buffer := make([]rune, 0, b.x*b.y)
+func (b *board) loadBuffer(buffer []rune) []rune {
 	for _, v := range b.cells {
 		for _, u := range v {
 			if u {
