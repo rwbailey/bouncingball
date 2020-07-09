@@ -109,12 +109,3 @@ func Clear() {
 func MoveTopLeft() {
 	fmt.Print("\033[H")
 }
-
-// Create the board [][]bool
-// Clear screen
-
-// Calculate and update the ball position
-// Draw the board into a []rune buffer
-// scree.MoveTopLeft()
-// Print the []rune buffer string(buffer)
-// time.Sleep(..)
