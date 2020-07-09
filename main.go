@@ -5,6 +5,11 @@ import (
 	"time"
 )
 
+const (
+	X = 0
+	Y = 1
+)
+
 func main() {
 	board := newBoard(30, 80)
 	buffer := make([]rune, 0, board.x*board.y)
@@ -52,27 +57,17 @@ func (b *board) updateBallOnBoard() {
 }
 
 func (b *board) nextBallPos() {
-	if b.ball.vel[0] == 1 {
-		if b.ball.pos[0] == b.x-1 {
-			b.ball.vel[0] = -1
-		}
-	} else {
-		if b.ball.pos[0] == 0 {
-			b.ball.vel[0] = 1
-		}
-	}
-	if b.ball.vel[1] == 1 {
-		if b.ball.pos[1] == b.y-1 {
-			b.ball.vel[1] = -1
-		}
-	} else {
-		if b.ball.pos[1] == 0 {
-			b.ball.vel[1] = 1
-		}
-	}
 
-	b.ball.pos[0] += b.ball.vel[0]
-	b.ball.pos[1] += b.ball.vel[1]
+	b.ball.pos[X] += b.ball.vel[X]
+	b.ball.pos[Y] += b.ball.vel[Y]
+
+	// Detect collisions with wlls and reverse velocity component
+	if b.ball.pos[X] <= 0 || b.ball.pos[X] >= b.x-1 {
+		b.ball.vel[X] *= -1
+	}
+	if b.ball.pos[Y] <= 0 || b.ball.pos[Y] >= b.y-1 {
+		b.ball.vel[Y] *= -1
+	}
 }
 
 func newBall() *ball {
