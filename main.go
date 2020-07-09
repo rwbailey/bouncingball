@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	board := newBoard(30, 40)
+	board := newBoard(30, 80)
 
 	for {
 		Clear()
@@ -32,17 +32,17 @@ type board struct {
 	ball  *ball
 }
 
-func (b *board) loadBuffer() []byte {
-	buffer := []byte{}
+func (b *board) loadBuffer() []rune {
+	buffer := []rune{}
 	for _, v := range b.cells {
 		for _, u := range v {
 			if u {
-				buffer = append(buffer, []byte("\xE2\x9A\xBD")...)
+				buffer = append(buffer, rune(9917))
 			} else {
-				buffer = append(buffer, []byte("  ")...)
+				buffer = append(buffer, rune(32))
 			}
 		}
-		buffer = append(buffer, []byte("\n")...)
+		buffer = append(buffer, rune(10))
 	}
 	return buffer
 }
