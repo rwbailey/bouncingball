@@ -33,7 +33,7 @@ type board struct {
 }
 
 func (b *board) loadBuffer() []rune {
-	buffer := []rune{}
+	buffer := make([]rune, 0, b.x*b.y)
 	for _, v := range b.cells {
 		for _, u := range v {
 			if u {
